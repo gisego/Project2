@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+
+#Trouver les infos de chaque produit
 url = "http://books.toscrape.com/catalogue/birdsong-a-story-in-pictures_975/index.html"
 page = requests.get(url)
 soup = BeautifulSoup(page.content, 'html.parser')
