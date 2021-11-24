@@ -1,11 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 
-#all categories
 
 
 
 # Pagination des categories
+
 
 
 def get_all_categories_pages(category):
@@ -23,11 +23,12 @@ def get_all_categories_pages(category):
     # print(list_sa)
     return list_sa
 
+#all categories
 
 # Trouver touts les produits de chaque category
 
 list_links_products = []
-for url in get_all_categories_pages('sequential-art_5', ):
+for url in get_all_categories_pages(''):
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'html.parser')
     for all_links in soup.find_all("div", class_= "image_container"):
@@ -121,7 +122,7 @@ en_tete = ["product_Page_Url", "title", "image_all_url", "product_Description", 
 # # creation du fichier csv
 import csv
 
-with open('projet2.csv', 'w') as fichier_csv:
+with open('projet3.csv', 'w') as fichier_csv:
     writer = csv.writer(fichier_csv, delimiter=',')
     writer.writerow(en_tete)
 #
@@ -132,3 +133,5 @@ with open('projet2.csv', 'w') as fichier_csv:
 
         writer.writerow(ligne)
 
+
+#travel#
