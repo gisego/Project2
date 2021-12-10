@@ -136,5 +136,11 @@ def write_csv(info_livre, nom_categorie):
      writer = csv.writer(fichier_csv, delimiter=',')
      writer.writerow(info_livre)
 
+#### Exemple TEST
+info_livre = {"lien": 'page_url', "universal_product_code": 'UPC', "Title": 'titre', "price_including_tax": 'price_in',
+         "price_excluding_tax": 'price_ex', "number_available": 'available', "product_description": 'descrip',
+         "category": 'cat', "review_rating": 'rating', "image_url": 'image'}
+nom_categorie = "Cat"
+print(write_csv(info_livre, nom_categorie))
 
 # Etape 6 Organiser toutes les fonctions dans le main du fichier.
