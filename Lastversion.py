@@ -130,11 +130,16 @@ def livre(lien_un_livre):
 # le csv.
 import csv
 
-def write_csv(info_livre, nom_categorie):
-    file_csv = nom_categorie + '.csv'
+infos_livre = livre('http://books.toscrape.com/catalogue/full-moon-over-noahs-ark-an-odyssey-to-mount-ararat-and-beyond_811/index.html')
+
+
+def write_csv(infos_livre, nom_categorie):
+     file_csv = nom_categorie + '.csv'
     with open(file_csv, 'w') as fichier_csv:
      writer = csv.writer(fichier_csv, delimiter=',')
-     writer.writerow(info_livre)
+     writer.writerow(livre(lien_un_livre))
+    return
+
 
 
 # Etape 6 Organiser toutes les fonctions dans le main du fichier.
