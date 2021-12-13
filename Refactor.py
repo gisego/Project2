@@ -156,8 +156,7 @@ def review_rating():
 
 import csv
 #
-en_tete = ["product_page_url", "title", "image_all_url", "product_description", "category", "universal_product_code",
-               "price_excluding_tax", "price_including_tax", "number_available", "review_rating"]
+en_tete = ["product_page_url", "title", "image", "product_description", "product_category", "universal_product_code", "price_excluding_tax", "price_including_tax", "number_available", "review_rating"]
 
 
 for category in find_categories_names():
@@ -168,11 +167,18 @@ for category in find_categories_names():
 
 for category in find_categories_names():
     product_info = all_links_products_from_categories()
-    for ligne in product_info:
-        ligne = product_page_url(), title(), image(), product_description(), product_category(), universal_product_code(), price_excluding_tax(), price_including_tax(), number_available(), review_rating()
-        with open(filename, 'w') as fichier_csv:
-            writer = csv.writer(fichier_csv, delimiter=',')
-            writer.writerow(ligne)
+    product_info = product_page_url(), title(), image(), product_description(), universal_product_code(), price_excluding_tax(), price_including_tax(), number_available(), review_rating()
+    with open(filename, 'w') as fichier_csv:
+        writer = csv.writer(fichier_csv, delimiter=',')
+        writer.writerow(product_info)
+
+    # for product_page_url, title, image, product_description, product_category, universal_product_code, price_excluding_tax, price_including_tax, number_available, review_rating in product_page_url(),title(), image(), product_description(), universal_product_code(), price_excluding_tax(), price_including_tax(), number_available(), review_rating():
+    #     ligne = [product_page_url, title, image, product_description, product_category, universal_product_code, price_excluding_tax, price_including_tax, number_available, review_rating]
+    #     with open(filename, 'w') as fichier_csv:
+    #         writer = csv.writer(fichier_csv, delimiter=',')
+    #         writer.writerow(ligne)
+
+
 
 # # Data from all products
 # list_data_products = {
