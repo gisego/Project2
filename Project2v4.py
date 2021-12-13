@@ -1,8 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-#categories pages
-
+#Obtenir les pages de toute la categorie
 def get_all_categories_pages(category):
     list_sa = []
     i = 0
@@ -19,13 +18,14 @@ def get_all_categories_pages(category):
             list_sa.append(url_general)
     return list_sa
 
-#Find categories
+#Trouver les categories
+
 url = 'http://books.toscrape.com/catalogue/category/books_1/index.html'
 r = requests.get(url)
 soup = BeautifulSoup(r.content, 'html.parser')
 
 list_categories = []
-for ultags in soup.find_all("ul", class_= "nav nav-list"):#Trouver les links des categories
+for ultags in soup.find_all("ul", class_= "nav nav-list"):
     for litags in ultags.find_all("a"):
         links_categories = litags['href']
         if links_categories.startswith(".."):
@@ -127,20 +127,24 @@ for url in list_links_products:
     review_Rating_list.append(review_Rating)
 
 
-# # # Création de la liste
-# en_tete = ["product_Page_Url", "title", "image_all_url", "product_Description", "category", "universal_Product_Code",
-#                "price_Excluding_Tax", "price_Including_Tax", "number_Available", "review_Rating"]
-# #
-# # # creation du fichier csv
-# import csv
+# # Création de la liste
+en_tete = ["product_Page_Url", "title", "image_all_url", "product_Description", "category", "universal_Product_Code",
+               "price_Excluding_Tax", "price_Including_Tax", "number_Available", "review_Rating"]
 #
-# with open('projet3.csv', 'w') as fichier_csv:
-#     writer = csv.writer(fichier_csv, delimiter=',')
-#     writer.writerow(en_tete)
-# #
-# # # export des infos
-#     for product_Page_Url, title, image_all_url, product_Description, category, universal_Product_Code,price_Excluding_Tax, price_Including_Tax, number_Available, review_Rating in zip(product_Page_Url_list, title_list, image_url_list, product_description_list, category_list, universal_code_list, price_excluding_tax_list,
-#          price_including_tax_list, number_available_list, review_Rating_list):
-#         ligne = [product_Page_Url, title, image_all_url, product_Description, category, universal_Product_Code,price_Excluding_Tax, price_Including_Tax, number_Available, review_Rating]
+# # creation du fichier csv
+import csv
+
+for category in list_categories:
+    filename = category + ".csv"
+    with open(filename, 'w') as fichier_csv:
+        writer = csv.writer(fichier_csv, delimiter=',')
+        writer.writerow(en_tete)
+
 #
-#         writer.writerow(ligne)
+# # export des infos problem: il extrait toutes les infos des toutes les categories
+
+        for product_Page_Url, title, image_all_url, product_Description, category, universal_Product_Code,price_Excluding_Tax, price_Including_Tax, number_Available, review_Rating in zip(product_Page_Url_list, title_list, image_url_list, product_description_list, category_list, universal_code_list, price_excluding_tax_list,
+             price_including_tax_list, number_available_list, review_Rating_list):
+            ligne = [product_Page_Url, title, image_all_url, product_Description, category, universal_Product_Code,price_Excluding_Tax, price_Including_Tax, number_Available, review_Rating]
+
+            writer.writerow(ligne)
