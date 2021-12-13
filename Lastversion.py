@@ -83,9 +83,21 @@ def page_livre(url_category):
 
 
 # Etape 3  Ecrire fonction Write_image(lien_image_livre, nom_categorie)# qui utilise path et wget pour classer en fonction des parametres "lien_image_livre, nom_categorie"
+from pathlib import Path
+import wget
 
-# def write_image(lien_image_livre, nom_categorie):
+def write_image(lien_image_livre, nom_categorie):
+    lien_image_livre = 'http://books.toscrape.com/media/cache/6d/41/6d418a73cc7d4ecfd75ca11d854041db.jpg'
+    nom_categorie = wget.download(lien_image_livre)
+    nom_categorie = Path('home/Desktop/Project2/images')
+    return
 
+base_image = 'image'
+
+# specifier le dossier dans lequel je stock l'image avec le package path(aller dans la docu)
+
+
+# tétécharger l'image a l'aide de wget en speficiant le chemin
 
 
 
@@ -126,8 +138,8 @@ def livre(lien_un_livre):
     dictio['review_Rating'] = review_Rating
     return dictio
 
-# Etape 5 Ecrire une fonction write_csv(infos_livre, nom categorie) qui ouvre un fichier csv avec pour nom la categorie passé en parametre, puis enregistre les infos "infos_livre" recu dans
-# le csv.
+Etape 5 Ecrire une fonction write_csv(infos_livre, nom categorie) qui ouvre un fichier csv avec pour nom la categorie passé en parametre, puis enregistre les infos "infos_livre" recu dans
+le csv.
 import csv
 
 infos_livre = livre('http://books.toscrape.com/catalogue/full-moon-over-noahs-ark-an-odyssey-to-mount-ararat-and-beyond_811/index.html')
@@ -139,12 +151,12 @@ def write_csv(infos_livre, nom_categorie):
      writer = csv.writer(fichier_csv, delimiter=',')
      writer.writerow(livre(lien_un_livre))
     return
-
-#### Exemple TEST
-info_livre = {"lien": 'testurl', "universal_product_code": 'UPC', "Title": 'titre', "price_including_tax": 'price_in',
-         "price_excluding_tax": 'price_ex', "number_available": 'available', "product_description": 'descrip',
-         "category": 'cat', "review_rating": 'rating', "image_url": 'image'}
-nom_categorie = "Cat"
-print(write_csv(info_livre, nom_categorie))
+#
+# # #### Exemple TEST
+# # info_livre = {"lien": 'testurl', "universal_product_code": 'UPC', "Title": 'titre', "price_including_tax": 'price_in',
+# #          "price_excluding_tax": 'price_ex', "number_available": 'available', "product_description": 'descrip',
+# #          "category": 'cat', "review_rating": 'rating', "image_url": 'image'}
+# nom_categorie = "Cat"
+# print(write_csv(info_livre, nom_categorie))
 
 # Etape 6 Organiser toutes les fonctions dans le main du fichier.
