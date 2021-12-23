@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 
 
 
+
 # Etape 1
 # Ecrire une fonction category(base_url) qui retourne les liens des categories dans un dictionnaire. Ex: return {"travel": 'http://books.toscrape.com/travel......'}
 #
@@ -138,19 +139,42 @@ def livre(lien_un_livre):
     dictio['review_Rating'] = review_Rating
     return dictio
 
-Etape 5 Ecrire une fonction write_csv(infos_livre, nom categorie) qui ouvre un fichier csv avec pour nom la categorie passé en parametre, puis enregistre les infos "infos_livre" recu dans
-le csv.
+# Etape 5 Ecrire une fonction write_csv(infos_livre, nom categorie) qui ouvre un fichier csv avec pour nom la categorie passé en parametre, puis enregistre les infos "infos_livre" recu dans
+# le csv.
 import csv
 
 infos_livre = livre('http://books.toscrape.com/catalogue/full-moon-over-noahs-ark-an-odyssey-to-mount-ararat-and-beyond_811/index.html')
 
 
-def write_csv(infos_livre, nom_categorie):
-     file_csv = nom_categorie + '.csv'
-    with open(file_csv, 'w') as fichier_csv:
-     writer = csv.writer(fichier_csv, delimiter=',')
-     writer.writerow(livre(lien_un_livre))
-    return
+titres =['product_page_url',
+            'universal_product_code',
+            'title',
+            'price_including_tax',
+            'price_excluding_tax',
+            'number_available',
+            'product_description',
+            'category',
+            'review_rating',
+            'image_url']
+def write_csv(info_livre, nom_categorie):
+    file_csv = nom_categorie + '.csv'
+    with open(file_csv, 'w', newline='', encoding='iso-8859-1') as fichier_csv:
+        ### my adds
+        write = csv.DictWriter(fichier_csv, fieldnames=titres)
+        write.writeheader()
+        # writer = csv.writer(fichier_csv, delimiter=',')
+        # for info_livr in info_livre:
+        write.writerow({'product_page_url': info_livre['lien'],
+                             'universal_product_code': info_livre['universal_product_code'],
+                             'title': info_livre['Title'],
+                             'price_including_tax': info_livre['price_including_tax'].strip(),
+                             'price_excluding_tax': info_livre['price_excluding_tax'].strip(),
+                             'number_available': info_livre['number_available'].strip(),
+                             'product_description': str(info_livre['product_description']),
+                             'category': info_livre['category'].strip(),
+                             'review_rating': info_livre['review_rating'].strip(),
+                             'image_url': info_livre['image_url']})
+
 #
 # # #### Exemple TEST
 # # info_livre = {"lien": 'testurl', "universal_product_code": 'UPC', "Title": 'titre', "price_including_tax": 'price_in',
